@@ -26,6 +26,7 @@ public class ReporteController {
 	public void reporte(@PathVariable("reportName") final String reportName,
 			@RequestParam(required = false) Map<String, Object> parameters, HttpServletResponse response,
 			HttpServletRequest request) throws Exception {
+		System.out.println("Se genera el repote "+reportName);
 		parameters = parameters == null ? new HashMap<>() : parameters;
 		ClassPathResource resource = new ClassPathResource("reportes" + File.separator + reportName + ".jasper");
 		InputStream jasperStream = resource.getInputStream();
@@ -34,6 +35,7 @@ public class ReporteController {
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition", "inline;");
 		final OutputStream outputStream = response.getOutputStream();
+		System.out.println("antes de exportar.");
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
 	}
 
