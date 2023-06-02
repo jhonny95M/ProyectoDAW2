@@ -1,0 +1,61 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Consolidado</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+	integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+	crossorigin="anonymous">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="css/Estilo-Principal.css" type="text/css" rel="stylesheet" />
+</head>
+<body action="" id="b">
+	<nav th:replace="Principal::nav">
+	</nav>
+	<header> <img src="img/mansion.png" alt="" width="100%">
+	</header>
+	<main>
+	<div th:replace="Principal::menu">
+	</div>
+	<section id="s2">
+	<div class="container">
+	
+	<p><b> Código del Alumno: <spam th:text="${alumno.idalumno}"></spam><br>
+		   Nombre del Alumno: <spam th:text="${alumno.nomalum}+' '+${alumno.apealum}"></spam></b>
+	</p>	
+		<table class="table">
+			<tr>
+				<th></th>
+				<th>Fecha de Matrícula</th>
+				<th>Curso</th>
+				<th>Profesor</th>
+				<th>Horario</th>				
+				<th></th>
+			</tr>
+				<tr class="grilla_campo" th:each="m: ${lstMat}">
+					<td></td>
+					<td th:text="${m.fechmat}"></td>
+					<td th:each="c: ${lstCursos}"
+						th:if="${c.idcurso}==${m.idcurso}"
+						th:text="${c.nomcurso}"></td>
+					<td th:each="p: ${lstProfesores}"
+						th:if="${p.idprof}==${m.idprof}"
+						th:text="${p.nomprof}+' '+${p.apeprof}"></td>
+					<td th:each="h: ${lstHorarios}"
+						th:if="${h.idhorario}==${m.idhorario}"
+						th:text="${h.deshorario}"></td>				
+				</tr>
+		</table>
+	</div>
+	</section> </main>
+	<footer th:replace="Principal::footer">
+	</footer>	
+</body>
+</html>
