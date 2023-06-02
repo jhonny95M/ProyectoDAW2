@@ -35,7 +35,6 @@ public class ReporteController {
 		response.setContentType("application/pdf");
 		response.setHeader("Content-Disposition", "inline;");
 		final OutputStream outputStream = response.getOutputStream();
-		System.out.println("antes de exportar.");
 		JasperExportManager.exportReportToPdfStream(jasperPrint, outputStream);
 	}
 
