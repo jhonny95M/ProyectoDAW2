@@ -19,6 +19,10 @@ public class CursoController {
 	@Autowired
 	private HorarioRepository hRepo;
 	
+	@GetMapping("/")
+	public String home(Model model) {
+		return "Home";
+	}
 	@GetMapping("/cargaHome")
 	public String cargarHome(Model model) {
 		return "Home";

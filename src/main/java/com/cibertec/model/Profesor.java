@@ -1,6 +1,8 @@
 package com.cibertec.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -8,6 +10,7 @@ import javax.persistence.Table;
 @Table(name="tb_profesores")
 public class Profesor {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idprof;
 	private String nomprof;
 	private String apeprof;

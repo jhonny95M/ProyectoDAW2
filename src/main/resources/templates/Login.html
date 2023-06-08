@@ -36,27 +36,34 @@
 	</header>
 	<main id="b">
 	<div id="form">
-		<form th:action="@{/validar}" method="post" th:object="${alumno}">
+		<form th:action="@{/login}" method="post" >
 			<h1>INICIA SESION</h1>
 			<br>
 			<div class="form-group">
 				<label id="label">Usuario</label>
-				<input id="textbox" th:field="*{usualum}"
-					maxlength="45" required type="email"
+				<input id="username" 
+					maxlength="45" required type="text" name="username"
 					class="form-control"
 					placeholder="Ingrese correo electronico">
 			</div>
 			<div class="form-group">
 				<label id="label">Password</label> 
-				<input id="textbox" th:field="*{passalum}"
-					 maxlength="6" required type="password"
+				<input id="password" 
+					 maxlength="100" required type="password" name="password"
 					class="form-control" placeholder="Ingrese Clave">
 			</div>
 			<br>
 			<button id="bform" type="submit" class="btn btn-primary">INGRESAR</button>
 		</form>
 		<br>
-		<div th:if="${mensaje}" th:text="${mensaje}" class="alert alert-danger" role="alert"></div>
+		<div th:if="${param.error}"  class="alert alert-danger" role="alert">
+			<div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+		</div>
+		<div th:if="${param.logout}">
+            You have been logged out.
+        </div>
 	</div>
 	<p>
 		Si no tiene cuenta, pulse <a href="/cargaRegistrar">aquí</a> para registrarse

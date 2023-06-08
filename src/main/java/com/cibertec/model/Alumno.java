@@ -4,8 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name="tb_alumnos")
 public class Alumno {
@@ -19,6 +24,11 @@ public class Alumno {
 	private String fechalum;
 	private String usualum;
 	private String passalum;
+	
+	@OneToOne
+    @JoinColumn(name = "idUsuario")
+    private User usuario;
+
 	
 	public int getIdalumno() {
 		return idalumno;

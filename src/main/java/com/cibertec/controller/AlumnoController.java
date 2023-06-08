@@ -1,7 +1,10 @@
 package com.cibertec.controller;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cibertec.model.Alumno;
 import com.cibertec.model.Curso;
 import com.cibertec.model.Matricula;
+import com.cibertec.model.Role;
+import com.cibertec.model.User;
 import com.cibertec.model.repository.AlumnoRepository;
 import com.cibertec.model.repository.CursoRepository;
 import com.cibertec.model.repository.HorarioRepository;
 import com.cibertec.model.repository.MatriculaRepository;
 import com.cibertec.model.repository.ProfesorRepository;
+import com.cibertec.service.AlumnoService;
+import com.cibertec.service.UserService;
 
 @Controller
 public class AlumnoController {
@@ -32,6 +39,13 @@ public class AlumnoController {
 	private ProfesorRepository pRepo;
 	@Autowired
 	private HorarioRepository hRepo;
+	
+	@Autowired
+	private AlumnoService alumnoService;
+	@Autowired
+	private UserService userService;
+	 @Autowired
+	    private PasswordEncoder passwordEncoder;
 	
 	@GetMapping("cargaLogin")
 	public String cargarLogin(Model model) {
@@ -66,7 +80,21 @@ public class AlumnoController {
 			model.addAttribute("mensaje", "Error al registrar, revise los datos");
 			return "Registro";
 		} else {
-		aRepo.save(alumno);
+			User user = new User();
+	        user.setUsername(alumno.getUsualum());
+	        user.setPassword(passwordEncoder.encode(alumno.getUsualum()));
+	        
+	        // Crear y asignar los roles al usuario
+	        List<Role> roles = new ArrayList<>();
+	            Role role = new Role();
+	            role.setId(2l);            
+	            roles.add(role);
+	        user.setRoles(roles);
+	        user.setAlumno(alumno);
+	        
+			//alumno.setUsuario(user);
+	        alumnoService.createAlumnoWithUserAndDefaultRole(alumno.getNomalum(), alumno.getApealum(), 
+	        		alumno.getDnialum(), alumno.getCelalum(), alumno.getFechalum(), alumno.getUsualum(), alumno.getPassalum());
 		model.addAttribute("mensaje", "Se registro correctamente al alumno: "+alumno.getNomalum());
 		return "Registro";
 		}
