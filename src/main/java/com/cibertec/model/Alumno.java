@@ -1,6 +1,7 @@
 package com.cibertec.model;
 
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +17,7 @@ import lombok.Data;
 public class Alumno {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idalumno;
+	private Long id;
 	private String nomalum;
 	private String apealum;
 	private String dnialum;
@@ -26,16 +27,10 @@ public class Alumno {
 	private String passalum;
 	
 	@OneToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "user_id",foreignKey = @ForeignKey(name = "none"))
     private User usuario;
 
 	
-	public int getIdalumno() {
-		return idalumno;
-	}
-	public void setIdalumno(int idalumno) {
-		this.idalumno = idalumno;
-	}
 	public String getNomalum() {
 		return nomalum;
 	}
@@ -80,7 +75,7 @@ public class Alumno {
 	}
 	@Override
 	public String toString() {
-		return "Alumno [idalumno=" + idalumno + ", nomalum=" + nomalum + ", apealum=" + apealum + ", dnialum=" + dnialum
+		return "Alumno [idalumno=" + id + ", nomalum=" + nomalum + ", apealum=" + apealum + ", dnialum=" + dnialum
 				+ ", celalum=" + celalum + ", fechalum=" + fechalum + ", usualum=" + usualum + ", passalum=" + passalum
 				+ "]";
 	}

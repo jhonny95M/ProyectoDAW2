@@ -1,6 +1,5 @@
 package com.cibertec.controller;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cibertec.model.Alumno;
 import com.cibertec.model.Curso;
-import com.cibertec.model.Matricula;
 import com.cibertec.model.Role;
 import com.cibertec.model.User;
 import com.cibertec.model.repository.AlumnoRepository;
@@ -24,8 +22,6 @@ import com.cibertec.model.repository.HorarioRepository;
 import com.cibertec.model.repository.MatriculaRepository;
 import com.cibertec.model.repository.ProfesorRepository;
 import com.cibertec.service.AlumnoService;
-import com.cibertec.service.UserService;
-
 @Controller
 public class AlumnoController {
 	
@@ -42,8 +38,6 @@ public class AlumnoController {
 	
 	@Autowired
 	private AlumnoService alumnoService;
-	@Autowired
-	private UserService userService;
 	 @Autowired
 	    private PasswordEncoder passwordEncoder;
 	
@@ -114,14 +108,14 @@ public class AlumnoController {
 			return "ActualizaDatos";
 		} else {
 		aRepo.save(alumno);
-		model.addAttribute("mensaje", "Se actualizaron los datos del alumno: "+alumno.getIdalumno());
+		model.addAttribute("mensaje", "Se actualizaron los datos del alumno: "+alumno.getId());
 		return "ActualizaDatos";
 		}
 	}
 	
 	@GetMapping("/cargaMat")
 	public String cargarMat(@ModelAttribute Curso curso, Model model) {
-		model.addAttribute("curso", cRepo.findById(curso.getIdcurso()));
+		model.addAttribute("curso", cRepo.findById(curso.getId()));
 		model.addAttribute("alumno", a);
 		model.addAttribute("lstHorarios", hRepo.findAll());
 		return "Matricula";
@@ -129,47 +123,44 @@ public class AlumnoController {
 	
 	@RequestMapping("/mat")
     public String mat(    	
-    	@RequestParam(value = "idalumno", required = false)Integer idalumno,
-        @RequestParam(value = "idcurso", required = false)Integer idcurso,
+    	@RequestParam(value = "idalumno", required = false)Long idalumno,
+        @RequestParam(value = "idcurso", required = false)Long idcurso,
         @RequestParam(value = "idhorario", required = false)Integer idhorario,
         @RequestParam(value = "idprof", required = false)Integer idprof,
         Model model)
 	{
-		Matricula x = mRepo.findByIdalumnoAndIdcurso(idalumno, idcurso);
-		if(x==null)
-		{ 
-			Calendar c = Calendar.getInstance();
-			String dia = Integer.toString(c.get(Calendar.DATE));
-			String mes = Integer.toString(c.get(Calendar.MONTH)+1);
-			String anio = Integer.toString(c.get(Calendar.YEAR));
-			String fecha=anio+"/"+mes+"/"+dia;
-			
-	        Matricula m = new Matricula();
-	        m.setIdalumno(idalumno);
-	        m.setIdcurso(idcurso);
-	        m.setIdhorario(idhorario);
-	        m.setFechmat(fecha);
-	        m.setIdprof(idprof);
-	        
-	        mRepo.save(m);
-			model.addAttribute("mensaje", "Se ha matriculado en el curso: "+m.getIdcurso());
-			model.addAttribute("curso", cRepo.findById(idcurso));
-			model.addAttribute("alumno", a);
-			return "Matricula";
-		}
-		else {			
-			model.addAttribute("mensaje","Usted ya se ha matriculado en este curso");
-			model.addAttribute("curso", cRepo.findById(idcurso));
-			model.addAttribute("alumno", a);
-			return "Matricula";
-		}
+		/*
+		 * Matricula x = null;//mRepo.findByIdalumnoAndIdcurso(idalumno, idcurso);
+		 * if(x==null) { Calendar c = Calendar.getInstance(); String dia =
+		 * Integer.toString(c.get(Calendar.DATE)); String mes =
+		 * Integer.toString(c.get(Calendar.MONTH)+1); String anio =
+		 * Integer.toString(c.get(Calendar.YEAR)); String fecha=anio+"/"+mes+"/"+dia;
+		 * 
+		 * Matricula m = new Matricula(); m.setIdalumno(idalumno);
+		 * m.setIdhorario(idhorario); m.setFechmat(fecha); m.setIdprof(idprof);
+		 * 
+		 * mRepo.save(m); model.addAttribute("mensaje",
+		 * "Se ha matriculado en el curso: "+1); model.addAttribute("curso",
+		 * cRepo.findById(idcurso)); model.addAttribute("alumno", a); return
+		 * "Matricula"; }
+		 */
+		/*
+		 * else {
+		 * 
+		 * model.addAttribute("mensaje","Usted ya se ha matriculado en este curso");
+		 * model.addAttribute("curso", cRepo.findById(idcurso));
+		 * model.addAttribute("alumno", a);
+		 * 
+		 * }
+		 */
+		return "Matricula";
 		
     }
 	
 	@GetMapping("/cargaConso")
 	public String cargarConso(Model model) {
 		model.addAttribute("alumno", a);		
-		model.addAttribute("lstMat", mRepo.findByIdalumno(a.getIdalumno()));
+		//model.addAttribute("lstMat", mRepo.findByIdalumno(a.getId()));
 		model.addAttribute("lstCursos", cRepo.findAll());
 		model.addAttribute("lstHorarios", hRepo.findAll());
 		model.addAttribute("lstProfesores", pRepo.findAll());

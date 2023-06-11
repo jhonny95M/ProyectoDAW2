@@ -4,9 +4,6 @@ package com.cibertec.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.cibertec.model.Role;
 import com.cibertec.model.User;
 import com.cibertec.model.repository.UserRepository;
 

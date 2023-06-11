@@ -42,9 +42,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests((requests) -> {
 			try {
 				requests
-				    .antMatchers("/css/*","/assets/*","/img/*","/js/*","/", "/home","/cargaHome","/cargaRegistrar","/api/user/register-login","/registrar").permitAll()
+				    .antMatchers("/api/**","/app/**","/app/*","/css/*","/assets/*","/img/*","/js/*","/", "/home","/cargaHome","/cargaRegistrar","/api/user/register-login","/registrar").permitAll()
 				    .anyRequest().authenticated().and()
-				    .csrf().disable();
+				    .csrf().disable().cors().disable();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

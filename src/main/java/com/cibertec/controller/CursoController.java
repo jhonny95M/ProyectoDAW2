@@ -23,6 +23,10 @@ public class CursoController {
 	public String home(Model model) {
 		return "Home";
 	}
+	@GetMapping(value = {"/angular", "/angular/{path:^(?!app|api).*$}/**"})
+	public String login(Model model) {
+		return "forward:/app/index.html";
+	}
 	@GetMapping("/cargaHome")
 	public String cargarHome(Model model) {
 		return "Home";

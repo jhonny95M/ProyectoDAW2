@@ -2,11 +2,8 @@ package com.cibertec.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
-
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,15 +14,11 @@ import org.springframework.stereotype.Service;
 
 import com.cibertec.model.Role;
 import com.cibertec.model.User;
-import com.cibertec.model.repository.RoleRepository;
-import com.cibertec.model.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserService userRepository;
-    @Autowired
-    private RoleRepository repository;
     
     @Override
     @Transactional

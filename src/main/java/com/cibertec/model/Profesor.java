@@ -1,62 +1,49 @@
 package com.cibertec.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name="tb_profesores")
 public class Profesor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idprof;
-	private String nomprof;
-	private String apeprof;
+	private Long idprof;
+	private String nombresprof;
+	private String apePatProf;
+	private String apeMatProf;
 	private String espeprof;
 	private String dniprof;
 	private String celprof;
 	
-	public int getIdprof() {
-		return idprof;
+	@ManyToMany
+    @JoinTable(
+        name = "profesor_curso",
+        joinColumns = @JoinColumn(name = "profesor_id",foreignKey = @ForeignKey(name = "none")),
+        inverseJoinColumns = @JoinColumn(name = "curso_id",foreignKey = @ForeignKey(name = "none"))
+    )
+    private List<Curso> cursos = new ArrayList<>();
+	
+	public Profesor(Long idProfesor) {
+		this.idprof=idProfesor;
 	}
-	public void setIdprof(int idprof) {
-		this.idprof = idprof;
-	}
-	public String getNomprof() {
-		return nomprof;
-	}
-	public void setNomprof(String nomprof) {
-		this.nomprof = nomprof;
-	}
-	public String getApeprof() {
-		return apeprof;
-	}
-	public void setApeprof(String apeprof) {
-		this.apeprof = apeprof;
-	}
-	public String getEspeprof() {
-		return espeprof;
-	}
-	public void setEspeprof(String espeprof) {
-		this.espeprof = espeprof;
-	}
-	public String getDniprof() {
-		return dniprof;
-	}
-	public void setDniprof(String dniprof) {
-		this.dniprof = dniprof;
-	}
-	public String getCelprof() {
-		return celprof;
-	}
-	public void setCelprof(String celprof) {
-		this.celprof = celprof;
-	}
+	public Profesor() {}
 	@Override
 	public String toString() {
-		return "Profesor [idprof=" + idprof + ", nomprof=" + nomprof + ", apeprof=" + apeprof + ", espeprof=" + espeprof
+		return "Profesor [idprof=" + idprof + ", nomprof=" + nombresprof + ", apeprof=" + apePatProf + ", espeprof=" + espeprof
 				+ ", dniprof=" + dniprof + ", celprof=" + celprof + "]";
 	}
 	

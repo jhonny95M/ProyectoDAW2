@@ -1,6 +1,5 @@
 package com.cibertec.service;
 
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,10 +14,6 @@ import com.cibertec.model.repository.UserRepository;
 
 @Service
 public class AlumnoService {
-	@Autowired
-	private AlumnoRepository _alumnoRepository;
-	@Autowired
-	private UserService userService;
 	
 	@Autowired
     private AlumnoRepository alumnoRepository;
