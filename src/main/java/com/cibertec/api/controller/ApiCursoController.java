@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cibertec.dto.CursoProfesorDTO;
+import com.cibertec.response.CursoResponse;
 import com.cibertec.service.CursoService;
 
 
@@ -18,9 +19,13 @@ import com.cibertec.service.CursoService;
 public class ApiCursoController {
 	@Autowired
 	private CursoService cursoservice;
-	@GetMapping
+	@GetMapping("/getAllWithProfesores")
 	public ResponseEntity<List<CursoProfesorDTO>> getAllWithProfesores() {
 		return new ResponseEntity<>(cursoservice.getAllCursosAndProfesores(),HttpStatus.OK);
+	}
+	@GetMapping
+	public ResponseEntity<List<CursoResponse>>getAll(){
+		return new ResponseEntity<List<CursoResponse>>(cursoservice.findAll(),HttpStatus.OK);
 	}
 
 }

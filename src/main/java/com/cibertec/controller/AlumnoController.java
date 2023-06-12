@@ -19,7 +19,6 @@ import com.cibertec.model.User;
 import com.cibertec.model.repository.AlumnoRepository;
 import com.cibertec.model.repository.CursoRepository;
 import com.cibertec.model.repository.HorarioRepository;
-import com.cibertec.model.repository.MatriculaRepository;
 import com.cibertec.model.repository.ProfesorRepository;
 import com.cibertec.service.AlumnoService;
 @Controller
@@ -29,8 +28,6 @@ public class AlumnoController {
 	private AlumnoRepository aRepo;
 	@Autowired
 	private CursoRepository cRepo;
-	@Autowired
-	private MatriculaRepository mRepo;
 	@Autowired
 	private ProfesorRepository pRepo;
 	@Autowired

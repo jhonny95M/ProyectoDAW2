@@ -10,11 +10,18 @@ import { NgFor, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { ProfesorPorCursoComponentComponent } from './profesor-por-curso-component/profesor-por-curso-component.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NavcabeceraComponent } from './layout/navcabecera/navcabecera.component';
+import { DialogAnimationsExampleDialog, HomecursoComponent } from './homecurso/homecurso.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProfesorPorCursoComponentComponent
+    ProfesorPorCursoComponentComponent,
+    NavcabeceraComponent,
+    HomecursoComponent,
+    DialogAnimationsExampleDialog
   ],
   imports: [
     BrowserModule,
@@ -26,7 +33,10 @@ import { HttpClientModule } from '@angular/common/http';
     NgFor, 
     MatButtonModule, 
     NgIf,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonModule, 
+    MatDialogModule,
+    CommonModule
    
   ],
   providers: [],

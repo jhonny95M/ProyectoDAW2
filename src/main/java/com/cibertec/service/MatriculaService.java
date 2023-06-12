@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.cibertec.model.Curso;
 import com.cibertec.model.Horario;
 import com.cibertec.model.Matricula;
-import com.cibertec.model.Profesor;
 import com.cibertec.model.ProfesorCurso;
 import com.cibertec.model.User;
 import com.cibertec.model.repository.MatriculaRepository;

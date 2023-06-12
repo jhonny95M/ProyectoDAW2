@@ -22,7 +22,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 		  registry.addMapping("/api/**")
           .allowedOrigins("http://localhost:4200")
           .allowedMethods("GET", "POST", "PUT", "DELETE")
-          .allowedHeaders("*");
+          .allowedHeaders("*")
+          .allowCredentials(true);
 	}
   }
  

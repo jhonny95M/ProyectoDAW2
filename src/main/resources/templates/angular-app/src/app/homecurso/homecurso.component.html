@@ -1,0 +1,80 @@
+<!-- 
+  <header>
+    <h1>Listado de Cursos</h1>
+    <div class="pagination">
+      <button class="pagination-button">&lt;</button>
+      <span class="current-page">1</span>
+      <button class="pagination-button">&gt;</button>
+    </div>
+  </header>
+  <main>
+    <div class="courses">
+      <div class="course">
+        <img src="course1.jpg" alt="Curso 1">
+        <h2>Curso 1</h2>
+        <p>Descripción del curso 1.</p>
+        <div class="course-footer">
+          <span class="course-price">$50</span>
+          <input type="number" class="quantity" value="1" min="1">
+          <button class="add-to-cart-button">Agregar al carrito</button>
+        </div>
+      </div>
+      <div class="course">
+        <img src="course1.jpg" alt="Curso 1">
+        <h2>Curso 2</h2>
+        <p>Descripción del curso 2.</p>
+        <div class="course-footer">
+          <span class="course-price">$75</span>
+          <input type="number" class="quantity" value="1" min="1">
+          <button class="add-to-cart-button">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="pagination">
+      <button class="pagination-button">&lt;</button>
+      <span class="current-page">1</span>
+      <button class="pagination-button">&gt;</button>
+    </div>
+    <div class="cart">
+      <span class="cart-items">0</span>
+      <i class="fas fa-shopping-cart"></i>
+    </div>
+  </footer>
+  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js"></script> -->
+
+  <header>
+    <h1>Listado de Cursos</h1>
+  </header>
+  
+  <main>
+    <section class="course-list">
+      <article class="course-item" *ngFor="let item of dataSource">
+        <img [src]="item.urlImage" alt="Curso 1" style="width: 5rem;">
+        <h2>{{item.nomcurso}}</h2>
+        <p>{{item.descripcionCurso}}</p>
+        <span class="course-price">${{item.precio}}</span>
+        <button (click)="agregarProductoAlCarrito(item)" class="add-to-cart">Agregar al Carrito</button>
+      </article>
+      
+      <!-- Agregar más artículos de cursos aquí -->
+    </section>
+    
+    <aside class="cart">
+      <h2>Carrito de Compras</h2>
+      <ul class="cart-items">
+        <!-- Los elementos del carrito se agregarán dinámicamente con JavaScript -->
+      </ul>
+      <div class="cart-total">
+        <span>Total:</span>
+        <span class="total-price">${{totalCarrito}}</span>
+      </div>
+      <button class="checkout">Realizar Compra</button>
+    </aside>
+  </main>
+  
+  <footer>
+    <p>Todos los derechos reservados &copy; 2023</p>
+  </footer>
+  
