@@ -3,6 +3,7 @@ package com.cibertec.api.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.xml.bind.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,17 +27,19 @@ public class ApiCarritoController {
     private HttpSession session;
 
     @PostMapping("/agregar")
-    public ResponseEntity<OkResponse> agregarProducto(@RequestBody CursoResponse producto) {
+    public ResponseEntity<OkResponse> agregarProducto(@RequestBody CursoResponse curso) throws ValidationException {
         Carrito carrito = obtenerCarrito();
-        carrito.agregarProducto(producto);
-        return ResponseEntity.ok(new OkResponse("Producto agregado al carrito"));
+        if(carrito.getContenido().stream().anyMatch(c->c.getId()==curso.getId()))
+        	throw new ValidationException("Ya fue agregado el curso "+curso.getNomcurso()+".");
+        carrito.agregarProducto(curso);
+        return ResponseEntity.ok(new OkResponse("Curso agregado exitosamente."));
     }
 
     @DeleteMapping("/eliminar/{idProducto}")
-    public ResponseEntity<OkResponse> eliminarProducto(@PathVariable Long idProducto) {
+    public ResponseEntity<OkResponse> eliminarProducto(@PathVariable Long idCurso) {
         Carrito carrito = obtenerCarrito();
-        carrito.eliminarProducto(idProducto);
-        return ResponseEntity.ok(new OkResponse("Producto eliminado del carrito"));
+        carrito.eliminarProducto(idCurso);
+        return ResponseEntity.ok(new OkResponse("El curso fue eliminado exitosamente."));
     }
 
     @GetMapping("/contenido")

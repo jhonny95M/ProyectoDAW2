@@ -1,3 +1,3 @@
 export interface OkResponse{
-    message:String
+    message:string
 }

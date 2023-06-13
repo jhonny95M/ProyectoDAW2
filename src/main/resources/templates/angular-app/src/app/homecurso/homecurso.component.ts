@@ -3,6 +3,8 @@ import { CursoResponse } from 'src/interfaces/cursoResponse';
 import { CarritoService } from 'src/services/carrito.service';
 import { CursoService } from 'src/services/curso.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import { HttpErrorResponse } from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-homecurso',
@@ -11,8 +13,11 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 })
 export class HomecursoComponent implements OnInit {
   dataSource!:CursoResponse[];
+  carritosource!:CursoResponse[];
   totalCarrito:number=0;
-  constructor(private dialog: MatDialog,private cursoservicio:CursoService,
+  constructor(private dialog: MatDialog,
+    private _snackBar: MatSnackBar,
+    private cursoservicio:CursoService,
     private carritoservice:CarritoService){}
   ngOnInit(): void {
     this.obtenerDatos();
@@ -32,20 +37,24 @@ export class HomecursoComponent implements OnInit {
   }
   agregarProductoAlCarrito(curso:CursoResponse){
     this.carritoservice.agregarProducto(curso).subscribe(c=>{
-      console.log(c);
-      this.dialog.open(DialogAnimationsExampleDialog, {
-        width: '250px',enterAnimationDuration:"0ms",exitAnimationDuration:"0ms",data:{ message: c.message }
-      });
+      this._snackBar.open(c.message, "ok");      
       this.obtenerContenido();
-    },error=>{
-      console.log(error)
+    },(error:HttpErrorResponse)=>{
+      if(error.status===400){
+        console.log(error.error.message)
+        console.log(error.message)
+        this.dialog.open(DialogAnimationsExampleDialog, {
+          width: '250px',enterAnimationDuration:"0ms",exitAnimationDuration:"0ms",data:{ message: error.error.message }
+        });
+      }
     });
     
   }
   obtenerContenido() {
 this.carritoservice.obtenerContenido()
 .subscribe(cursos=>{
-this.totalCarrito=cursos.reduce((sum, curso) => sum + curso.precio, 0);
+  this.carritosource=cursos;
+this.totalCarrito=this.carritosource.reduce((sum, curso) => sum + curso.precio, 0);
 });
   }
   

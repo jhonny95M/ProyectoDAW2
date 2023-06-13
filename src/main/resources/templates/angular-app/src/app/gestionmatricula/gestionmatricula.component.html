@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>Lista de Cursos</h1>
+  <div class="course-category" *ngFor="let item of dataSource">
+    <h2>{{item.curso.nomcurso}}</h2>
+    <div class="course-list" >
+      <div class="course" *ngFor="let profesor of item.profesores">
+        <label class="course-checkbox">
+          <input type="checkbox" name="chk1" checked>
+          <span class="checkmark">
+            <span class="checkmark-inner"></span>
+          </span>
+        </label>
+        <h2 class="course-title">{{profesor.nombresprof}}</h2>
+        <p class="course-info"><b> {{profesor.apePatprof}} {{ profesor.apeMatProf}}</b></p>
+        <p class="course-info">Horario: {{obtenerNombresDias(profesor.fin)}} de {{ obtenerHora(profesor.inicio)}} a {{ obtenerHora(profesor.fin)}}</p>
+      </div>
+    </div>
+  </div>
+  <button class="register-button">Registrar Matricula</button>
+</div>

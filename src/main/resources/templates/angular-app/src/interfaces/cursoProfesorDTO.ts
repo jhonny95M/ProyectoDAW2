@@ -4,9 +4,12 @@ export interface CursoProfesorDTO {
   }
   
   export interface ProfesorDTO {
-    nomprof: string;
-    apeprof: string;
+    nombresprof: string;
+    apePatprof: string;
+    apeMatProf: string;
     espeprof: string;
+    inicio:Date;
+    fin:Date;
   }
   export interface CursoDTO {
     idcurso: number;

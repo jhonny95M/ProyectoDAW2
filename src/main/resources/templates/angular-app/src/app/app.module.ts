@@ -14,6 +14,10 @@ import { NavcabeceraComponent } from './layout/navcabecera/navcabecera.component
 import { DialogAnimationsExampleDialog, HomecursoComponent } from './homecurso/homecurso.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
+import {MatListModule} from '@angular/material/list';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { GestionmatriculaComponent } from './gestionmatricula/gestionmatricula.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,8 @@ import { CommonModule } from '@angular/common';
     ProfesorPorCursoComponentComponent,
     NavcabeceraComponent,
     HomecursoComponent,
-    DialogAnimationsExampleDialog
+    DialogAnimationsExampleDialog,
+    GestionmatriculaComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,10 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     MatButtonModule, 
     MatDialogModule,
-    CommonModule
+    CommonModule,
+    MatListModule,
+    MatDividerModule,
+    MatSnackBarModule
    
   ],
   providers: [],

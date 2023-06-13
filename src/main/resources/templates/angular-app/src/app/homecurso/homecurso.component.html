@@ -55,22 +55,28 @@
         <h2>{{item.nomcurso}}</h2>
         <p>{{item.descripcionCurso}}</p>
         <span class="course-price">${{item.precio}}</span>
-        <button (click)="agregarProductoAlCarrito(item)" class="add-to-cart">Agregar al Carrito</button>
+        <button (click)="agregarProductoAlCarrito(item)" class="add-to-cart">Agregar Curso</button>
       </article>
       
       <!-- Agregar más artículos de cursos aquí -->
     </section>
     
     <aside class="cart">
-      <h2>Carrito de Compras</h2>
-      <ul class="cart-items">
-        <!-- Los elementos del carrito se agregarán dinámicamente con JavaScript -->
-      </ul>
+      <h2>Cursos Agregados</h2>
+      <!-- <ul class="cart-items">
+       
+      </ul> -->
+      <mat-list>
+        <ng-container *ngFor="let item of carritosource">
+        <mat-list-item>{{item.nomcurso}}</mat-list-item>
+        <mat-divider></mat-divider>
+      </ng-container>
+      </mat-list>
       <div class="cart-total">
         <span>Total:</span>
         <span class="total-price">${{totalCarrito}}</span>
       </div>
-      <button class="checkout">Realizar Compra</button>
+      <button class="checkout">Gestionar Matricula</button>
     </aside>
   </main>
   
