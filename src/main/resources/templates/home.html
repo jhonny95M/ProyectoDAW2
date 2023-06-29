@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>Home</title>
@@ -27,21 +27,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body id="b">
-	<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-		<a class="navbar-brand" href="/cargaHome"> <i class="fas fa-university"></i>
-		</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			<div class="navbar-nav">
-				<a id="link" class="nav-link active" href="/cargaLogin"><span
-					class="sr-only">(current)</span></a> <a id="link" class="nav-link"
-					href="#about">Nosotros</a> <a id="link" class="nav-link" href="#popular-courses">Cursos Populares</a>
-			</div>
-		</div>
+	<nav th:replace="menu.html::menu">
 	</nav>
 	<header>
 		<section id="hero"

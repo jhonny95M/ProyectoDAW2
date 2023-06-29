@@ -19,22 +19,16 @@ public class CursoController {
 	@Autowired
 	private HorarioRepository hRepo;
 	
-	@GetMapping("/")
-	public String home(Model model) {
-		return "Home";
-	}
+	
 	@GetMapping(value = {"/angular/", "/angular/{path:^(?!app|api).*$}/**"})
 	public String login(Model model) {
 		return "forward:/index.html";
 	}
-	@GetMapping("/cargaHome")
-	public String cargarHome(Model model) {
-		return "Home";
-	}
+	
 	
 	@GetMapping("/cargaPrincipal")
 	public String cargarPrincipal(Model model) {
-		return "Principal";
+		return "home";
 	}
 	
 	@GetMapping("/cargaCur")

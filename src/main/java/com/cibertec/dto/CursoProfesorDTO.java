@@ -17,7 +17,7 @@ public class CursoProfesorDTO {
 	public CursoProfesorDTO(Long id, String nombre,LocalDateTime inicio,LocalDateTime fin,Profesor p) {
 		curso.setIdcurso(id);
 		curso.setNomcurso(nombre);
-		profesores.add(new ProfesorDTO(p.getNombresprof(),p.getApePatProf(),p.getApeMatProf(),p.getEspeprof(),inicio,fin));
+		profesores.add(new ProfesorDTO(p.getIdprof(),p.getNombresprof(),p.getApePatProf(),p.getApeMatProf(),p.getEspeprof(),inicio,fin));
 	}
 	public CursoProfesorDTO(Long id, String nombre) {
 		curso.setIdcurso(id);

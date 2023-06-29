@@ -1,4 +1,4 @@
-package com.cibertec.controller;
+package com.cibertec.api.controller;
 
 import java.util.ArrayList;
 import java.util.List;

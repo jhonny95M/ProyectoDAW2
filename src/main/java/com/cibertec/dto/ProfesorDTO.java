@@ -22,6 +22,15 @@ public class ProfesorDTO {
 		this.inicio=inicio;
 		this.fin=fin;
 	}
+	public ProfesorDTO(Long id,String nomprof, String apeprof,String apeMat, String espeprof,LocalDateTime inicio,LocalDateTime fin) {
+		this.id=id;
+		this.nombresprof = nomprof;
+		this.apePatprof = apeprof;
+		this.apeMatProf=apeMat;
+		this.espeprof = espeprof;
+		this.inicio=inicio;
+		this.fin=fin;
+	}
 	public ProfesorDTO() {
 	}
 	

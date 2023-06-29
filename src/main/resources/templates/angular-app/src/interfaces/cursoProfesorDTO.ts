@@ -1,18 +1,20 @@
-export interface CursoProfesorDTO {
-    curso:CursoDTO;
-    profesores: ProfesorDTO[];
+export class CursoProfesorDTO {
+    curso!:CursoDTO;
+    profesores!: ProfesorDTO[];
   }
   
-  export interface ProfesorDTO {
-    nombresprof: string;
-    apePatprof: string;
-    apeMatProf: string;
-    espeprof: string;
-    inicio:Date;
-    fin:Date;
+  export class ProfesorDTO {
+    id!:number;
+    nombresprof!: string;
+    apePatprof!: string;
+    apeMatProf!: string;
+    espeprof!: string;
+    inicio!:Date;
+    fin!:Date;
+    isChecked!:boolean;
   }
-  export interface CursoDTO {
-    idcurso: number;
-    nomcurso: string;
+  export class CursoDTO {
+    idcurso!: number;
+    nomcurso!: string;
   }
   

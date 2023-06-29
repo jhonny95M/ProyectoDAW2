@@ -5,16 +5,16 @@
     <div class="course-list" >
       <div class="course" *ngFor="let profesor of item.profesores">
         <label class="course-checkbox">
-          <input type="checkbox" name="chk1" checked>
+          <input type="radio" [name]="'curso'+item.curso.idcurso" [value]="''+profesor.id+profesor.inicio" [checked]="profesor.isChecked" (change)="radioChanged(item,profesor)"/>
           <span class="checkmark">
             <span class="checkmark-inner"></span>
           </span>
         </label>
         <h2 class="course-title">{{profesor.nombresprof}}</h2>
         <p class="course-info"><b> {{profesor.apePatprof}} {{ profesor.apeMatProf}}</b></p>
-        <p class="course-info">Horario: {{obtenerNombresDias(profesor.fin)}} de {{ obtenerHora(profesor.inicio)}} a {{ obtenerHora(profesor.fin)}}</p>
+        <p *ngIf="profesor.inicio!=null" class="course-info">Horario: {{obtenerNombresDias(profesor.fin)}} de {{ obtenerHora(profesor.inicio)}} a {{ obtenerHora(profesor.fin)}}</p>
       </div>
     </div>
   </div>
-  <button class="register-button">Registrar Matricula</button>
+  <button class="register-button"   (click)="openDialog('0ms', '0ms')" >Registrar Matricula</button>
 </div>

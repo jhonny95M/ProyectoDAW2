@@ -17,7 +17,8 @@ import { CommonModule } from '@angular/common';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { GestionmatriculaComponent } from './gestionmatricula/gestionmatricula.component';
+import { DialogConfirmation, GestionmatriculaComponent } from './gestionmatricula/gestionmatricula.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { GestionmatriculaComponent } from './gestionmatricula/gestionmatricula.c
     NavcabeceraComponent,
     HomecursoComponent,
     DialogAnimationsExampleDialog,
-    GestionmatriculaComponent
+    GestionmatriculaComponent,
+    DialogConfirmation
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import { GestionmatriculaComponent } from './gestionmatricula/gestionmatricula.c
     CommonModule,
     MatListModule,
     MatDividerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FormsModule
    
   ],
   providers: [],

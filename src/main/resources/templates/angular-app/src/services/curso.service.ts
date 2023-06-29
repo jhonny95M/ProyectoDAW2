@@ -11,9 +11,9 @@ export class CursoService {
 
   constructor(private http: HttpClient) { }
   getAllWithProfesores():Observable<CursoProfesorDTO[]>{
-    return this.http.get<CursoProfesorDTO[]>('http://localhost:8081/api/curso/getAllWithProfesores');
+    return this.http.get<CursoProfesorDTO[]>(`${window.location.origin}/api/curso/getAllWithProfesores`);
   }
   getAll():Observable<CursoResponse[]>{
-    return this.http.get<CursoResponse[]>('http://localhost:8081/api/curso');
+    return this.http.get<CursoResponse[]>(`${window.location.origin}/api/curso`);
   }
 }

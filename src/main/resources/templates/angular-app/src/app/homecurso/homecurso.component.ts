@@ -5,6 +5,7 @@ import { CursoService } from 'src/services/curso.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homecurso',
@@ -18,7 +19,8 @@ export class HomecursoComponent implements OnInit {
   constructor(private dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private cursoservicio:CursoService,
-    private carritoservice:CarritoService){}
+    private carritoservice:CarritoService,
+    private router: Router){}
   ngOnInit(): void {
     this.obtenerDatos();
     this.obtenerContenido();
@@ -56,6 +58,16 @@ this.carritoservice.obtenerContenido()
   this.carritosource=cursos;
 this.totalCarrito=this.carritosource.reduce((sum, curso) => sum + curso.precio, 0);
 });
+  }
+  eliminarItemCarrito(id:number){
+    this.carritoservice.eliminarProducto(id)
+    .subscribe(rsp=>{
+      this._snackBar.open(rsp.message, "ok");
+      this.obtenerContenido();
+    },(error)=>console.log(error))
+  }
+  gestionarMatricula(){
+    this.router.navigateByUrl('/angular/gestionar-matricula',{skipLocationChange:true});
   }
   
 }

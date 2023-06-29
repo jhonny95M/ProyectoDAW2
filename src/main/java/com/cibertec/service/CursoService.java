@@ -30,7 +30,7 @@ public class CursoService {
 	public List<CursoProfesorDTO> getAllCursosAndProfesores() {
 		List<CursoProfesorDTO>listaReturn=new ArrayList<>();
 		List<CursoProfesorDTO>cursos=proCursoRepository.findCursoProfesorDTOsByEstado();
-		// Agrupar por edad
+		// Agrupar por curso
         Map<CursoDTO, List<CursoProfesorDTO>> cursosById = cursos.stream()
                 .collect(Collectors.groupingBy(CursoProfesorDTO::getCurso));
         

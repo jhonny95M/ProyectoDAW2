@@ -20,6 +20,7 @@ import com.cibertec.model.repository.AlumnoRepository;
 import com.cibertec.model.repository.CursoRepository;
 import com.cibertec.model.repository.HorarioRepository;
 import com.cibertec.model.repository.ProfesorRepository;
+import com.cibertec.model.repository.UserRepository;
 import com.cibertec.service.AlumnoService;
 @Controller
 public class AlumnoController {
@@ -32,6 +33,8 @@ public class AlumnoController {
 	private ProfesorRepository pRepo;
 	@Autowired
 	private HorarioRepository hRepo;
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Autowired
 	private AlumnoService alumnoService;
@@ -70,7 +73,12 @@ public class AlumnoController {
 			alumno.getFechalum() =="" || alumno.getUsualum() =="" || alumno.getPassalum() =="") {
 			model.addAttribute("mensaje", "Error al registrar, revise los datos");
 			return "Registro";
-		} else {
+		} 
+		List<User> users=userRepository.findAll();
+		if(users.stream().anyMatch(p->p.getUsername().equals(alumno.getUsualum()))) {
+			model.addAttribute("mensaje", "el usuario ingresado ya se encuentra registrado.");
+			return "Registro";
+		}
 			User user = new User();
 	        user.setUsername(alumno.getUsualum());
 	        user.setPassword(passwordEncoder.encode(alumno.getUsualum()));
@@ -87,8 +95,8 @@ public class AlumnoController {
 	        alumnoService.createAlumnoWithUserAndDefaultRole(alumno.getNomalum(), alumno.getApealum(), 
 	        		alumno.getDnialum(), alumno.getCelalum(), alumno.getFechalum(), alumno.getUsualum(), alumno.getPassalum());
 		model.addAttribute("mensaje", "Se registro correctamente al alumno: "+alumno.getNomalum());
-		return "Registro";
-		}
+		return "registroSucces";
+		
 	}
 	
 	@GetMapping("/cargaActualizar")
@@ -156,6 +164,7 @@ public class AlumnoController {
 	
 	@GetMapping("/cargaConso")
 	public String cargarConso(Model model) {
+		a=new Alumno();
 		model.addAttribute("alumno", a);		
 		//model.addAttribute("lstMat", mRepo.findByIdalumno(a.getId()));
 		model.addAttribute("lstCursos", cRepo.findAll());

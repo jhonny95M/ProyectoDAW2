@@ -11,8 +11,4 @@ public class ErrorResponse {
 		this.title = title;
 		this.message = message;
 	}
-    
-    
-    
-
 }

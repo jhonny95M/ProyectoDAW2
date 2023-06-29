@@ -8,7 +8,9 @@ import javax.xml.bind.ValidationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.cibertec.dto.CursoDTO;
 import com.cibertec.model.Curso;
 import com.cibertec.model.Horario;
 import com.cibertec.model.Matricula;
@@ -32,6 +34,7 @@ public class MatriculaService {
 	@Autowired
 	private ProfesorCursoRepository profesorCursoRepository;
 
+	@Transactional
 	public int ResgistrarMatricula(MatriculaRequest request) throws NotFoundException, ValidationException {
 		// Obtener el usuario correspondiente a la matrícula
         User usuario = userRepository.findById(request.getIdUsuario())
@@ -48,7 +51,7 @@ public class MatriculaService {
 			// Validar que el profesor curso tenga al menos un horario
 
 			if (profesorCurso.getHorarios().isEmpty()) {
-				throw new ValidationException("El profesor curso no tiene horarios disponibles");
+				throw new ValidationException("El profesor "+profesorCurso.getProfesor().getNombresprof()+" del curso "+profesorCurso.getCurso().getNomcurso()+" no tiene horarios disponibles");
 			}
 			horarios.addAll(profesorCurso.getHorarios());
 			 // Agregar el profesor curso a la lista de cursos
@@ -89,6 +92,21 @@ public class MatriculaService {
         LocalDateTime fin2 = horario2.getFin();
 
         return (inicio1.isBefore(fin2) && fin1.isAfter(inicio2)) || (inicio2.isBefore(fin1) && fin2.isAfter(inicio1));
+    }
+    public List<com.cibertec.dto.MatriculaDto>findMatriculaByUsuario(long id){
+    	List<com.cibertec.dto.MatriculaDto>listado=new ArrayList<>();
+    	List<Matricula>matriculas= matriculaRepository.findUsuarioById(id);
+    	for (Matricula m : matriculas) {
+    		com.cibertec.dto.MatriculaDto ma=new com.cibertec.dto.MatriculaDto(m.getId(), m.getFechmat(),m.getUsuario().getId(),m.getUsuario().getAlumno().getNomalum());
+    		List<Curso>cursos=m.getCursos();
+    		List<CursoDTO>cursosdto=new ArrayList<>();
+    		for (Curso curso : cursos) {
+				cursosdto.add(new CursoDTO(curso.getId(), curso.getNomcurso()));
+			}
+    		ma.setCursos(cursosdto);
+			listado.add(ma);
+		}
+    	return listado;
     }
 
 }

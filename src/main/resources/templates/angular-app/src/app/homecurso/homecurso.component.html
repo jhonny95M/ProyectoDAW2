@@ -68,15 +68,26 @@
       </ul> -->
       <mat-list>
         <ng-container *ngFor="let item of carritosource">
-        <mat-list-item>{{item.nomcurso}}</mat-list-item>
+        <mat-list-item>
+          <div style="display: flex; justify-content: space-between;">
+          <div>
+          {{item.nomcurso}} 
+        </div>
+        <div>
+          <button (click)="eliminarItemCarrito(item.id)" mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+        </mat-list-item>        
         <mat-divider></mat-divider>
       </ng-container>
       </mat-list>
       <div class="cart-total">
         <span>Total:</span>
-        <span class="total-price">${{totalCarrito}}</span>
+        <span class="total-price">${{totalCarrito | number:'2.2-2'}}</span>
       </div>
-      <button class="checkout">Gestionar Matricula</button>
+      <button class="checkout" (click)="gestionarMatricula()">Gestionar Matricula</button>
     </aside>
   </main>
   
